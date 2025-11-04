@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - GFG Campus Body</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>GFGNTC</span>
+            </div>
+            <span class="brand-name">GeeksforGeeks NITRA</span>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="events.html" class="nav-link active">Events</a></li>
+            <li><a href="index.html#team" class="nav-link">Team</a></li>
+            <li><a href="index.html#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <button class="join-btn">Join Community</button>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Events Hero Section -->
+    <section class="events-hero">
+        <div class="container">
+            <h1>Our Events</h1>
+            <p>Discover upcoming coding contests, workshops, and hackathons</p>
+        </div>
+    </section>
+
+    <!-- Events Filter -->
+    <section class="events-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="filter-btn" data-filter="past">Past Events</button>
+                <button class="filter-btn" data-filter="partner">Partner Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="events-grid">
+        <div class="container">
+            <div class="events-container">
+                <!-- Event cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Brand Section -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <i class="fas fa-code"></i>
+                    <span>GFGNTC</span>
+                </div>
+                <p class="footer-description">
+                    GeeksforGeeks Campus Body at NITRA Technical Campus - 
+                    Empowering coders and building a strong developer community.
+                </p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/company/gfg-nitracampus" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/gfg-nitracampus" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com/gfg_nitra" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://chat.whatsapp.com/your-group-link" class="social-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:gfgcampus.nitra@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://www.geeksforgeeks.org/" target="_blank">GFG Portal</a></li>
+                    <li><a href="https://practice.geeksforgeeks.org/" target="_blank">Practice</a></li>
+                    <li><a href="https://www.geeksforgeeks.org/courses" target="_blank">Courses</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-contact">
+                <h3>Get In Touch</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>NITRA Technical Campus, Ghaziabad</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>gfgcampus.nitra@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.gfgcampusnitra.com</span>
+                    </div>
+                </div>
+                
+                <!-- Newsletter Signup -->
+                <div class="newsletter">
+                    <h4>Stay Updated</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                <p>&copy; 2024 GeeksforGeeks Campus Body, NITRA Technical Campus. All rights reserved.</p>
+            </div>
+            <div class="footer-credits">
+                <p>Made with <i class="fas fa-heart"></i> by GFG NITRA Team</p>
+            </div>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+</footer>
+
+    <script src="events-data.js"></script>
+    <script src="events.js"></script>
+</body>
+</html>
