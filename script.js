@@ -1,10 +1,435 @@
+// script.js - Main JavaScript file with all functionality
 
-// Navbar functionality
-document.addEventListener('DOMContentLoaded', function() {
+// Global variables
+let currentImageIndex = 0;
+
+// Main initialization function
+function initializeApp() {
+    initNavigation();
+    initNavbar();
+    generateHeroSection();
+    initHeroSection();
+
+    generateAboutSection();
+    initAboutSection();
+    
+    
+    generateTeamSection();
+    initTeamSection();
+
+    generateGallerySection();
+    initGallerySection();
+
+    generateFAQSection();
+    initFAQSection();
+
+    generateContactSection();
+    initContactSection();
+    initFooter();
+    
+    console.log('GFG NITRA Website initialized successfully!');
+}
+
+// ===== NAVIGATION INITIALIZATION =====
+function initNavigation() {
+    generateNavLinks();
+    generateFooter();
+    setupActionButtons();
+}
+
+// Generate navigation links from data
+function generateNavLinks() {
+    const navContainer = document.querySelector('.nav-links');
+    if (!navContainer || !navigationData.navLinks) return;
+
+    navContainer.innerHTML = navigationData.navLinks.map(link => `
+        <li>
+            <a href="${link.href}" class="nav-link" ${link.target ? `target="${link.target}"` : ''}>
+                ${link.text}
+            </a>
+        </li>
+    `).join('');
+}
+
+// Generate footer from data
+function generateFooter() {
+    generateFooterBrand();
+    generateFooterLinks();
+    generateFooterContact();
+    generateFooterBottom();
+}
+
+function generateFooterBrand() {
+    const container = document.querySelector('.footer-brand');
+    if (!container || !navigationData.footer.brand) return;
+
+    container.innerHTML = `
+        <div class="footer-logo">
+            <i class="fas fa-code"></i>
+            <span>${navigationData.footer.brand.logo}</span>
+        </div>
+        <span class="brand-name">${navigationData.footer.brand.name}</span>
+        <p class="footer-description">${navigationData.footer.brand.description}</p>
+        <div class="footer-social">
+            ${navigationData.footer.socialLinks.map(link => `
+                <a href="${link.href}" class="social-link" target="_blank" title="${link.platform}">
+                    <i class="${link.icon}"></i>
+                </a>
+            `).join('')}
+        </div>
+    `;
+}
+
+// script.js - Hero section generation
+function generateHeroSection() {
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection || !navigationData.hero) return;
+
+    heroSection.innerHTML = `
+        <div class="hero-content">
+            <h1 class="hero-title">${navigationData.hero.title}</h1>
+            <h2 class="hero-subtitle">${navigationData.hero.subtitle}</h2>
+            <p class="hero-description">${navigationData.hero.description}</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">${navigationData.hero.buttons.primary.text}</button>
+                <button class="btn-secondary">${navigationData.hero.buttons.secondary.text}</button>
+            </div>
+        </div>
+        <div class="hero-stats">
+            ${navigationData.hero.stats.map(stat => `
+                <div class="stat">
+                    <h3>${stat.value}</h3>
+                    <p>${stat.label}</p>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// script.js - About section generation
+function generateAboutSection() {
+    const aboutSection = document.querySelector('#about');
+    if (!aboutSection || !navigationData.about) return;
+
+    aboutSection.innerHTML = `
+        <div class="container">
+            <h2 class="section-title">${navigationData.about.title}</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">${navigationData.about.description}</p>
+                    <div class="about-features">
+                        ${navigationData.about.features.map(feature => `
+                            <div class="feature">
+                                <i class="${feature.icon}"></i>
+                                <h4>${feature.title}</h4>
+                                <p>${feature.description}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="about-logos">
+                    ${navigationData.about.logos.map(logo => `
+                        <div class="logo-card">
+                            <img src="${logo.image}" alt="${logo.alt}">
+                            <h4>${logo.name}</h4>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// script.js - Team section generation
+function generateTeamSection() {
+    const teamSection = document.querySelector('#team');
+    if (!teamSection || !navigationData.team) return;
+
+    teamSection.innerHTML = `
+        <div class="container">
+            <h2 class="section-title">${navigationData.team.title}</h2>
+            <p class="section-subtitle">${navigationData.team.subtitle}</p>
+            
+            <!-- Team Filter -->
+            <div class="team-filter">
+                ${navigationData.team.filters.map(filter => `
+                    <button class="team-filter-btn ${filter.id === 'all' ? 'active' : ''}" data-team="${filter.id}">
+                        ${filter.text}
+                    </button>
+                `).join('')}
+            </div>
+
+            <!-- Team Grid -->
+            <div class="team-grid">
+                <!-- Team members will be populated by team-data.js -->
+            </div>
+        </div>
+    `;
+}
+
+// script.js - Gallery section generation
+function generateGallerySection() {
+    const gallerySection = document.querySelector('#gallery');
+    if (!gallerySection || !navigationData.gallery) return;
+
+    gallerySection.innerHTML = `
+        <div class="container">
+            <h2 class="section-title">${navigationData.gallery.title}</h2>
+            <p class="section-subtitle">${navigationData.gallery.subtitle}</p>
+            
+            <!-- Gallery Filter -->
+            <div class="gallery-filter">
+                ${navigationData.gallery.filters.map(filter => `
+                    <button class="gallery-filter-btn ${filter.id === 'all' ? 'active' : ''}" data-category="${filter.id}">
+                        ${filter.text}
+                    </button>
+                `).join('')}
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Gallery items will be populated by gallery-data.js -->
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="galleryLightbox" class="lightbox">
+            <div class="lightbox-content">
+                <span class="lightbox-close">&times;</span>
+                <img class="lightbox-image" src="" alt="">
+                <div class="lightbox-caption">
+                    <h3 class="lightbox-title"></h3>
+                    <p class="lightbox-description"></p>
+                    <div class="lightbox-meta">
+                        <span class="lightbox-event"></span>
+                        <span class="lightbox-date"></span>
+                    </div>
+                </div>
+                <button class="lightbox-nav lightbox-prev">&#10094;</button>
+                <button class="lightbox-nav lightbox-next">&#10095;</button>
+            </div>
+        </div>
+    `;
+}
+
+// script.js - FAQ section generation
+function generateFAQSection() {
+    const faqSection = document.querySelector('#faq');
+    if (!faqSection || !navigationData.faq) return;
+
+    faqSection.innerHTML = `
+        <div class="container">
+            <h2 class="section-title">${navigationData.faq.title}</h2>
+            <p class="section-subtitle">${navigationData.faq.subtitle}</p>
+            
+            <div class="faq-container">
+                <!-- FAQ items will be populated by faq-data.js -->
+            </div>
+            
+            <div class="faq-contact">
+                <p>${navigationData.faq.contactText}</p>
+            </div>
+        </div>
+    `;
+}
+
+// script.js - Contact section generation
+function generateContactSection() {
+    const contactSection = document.querySelector('#contact');
+    if (!contactSection || !navigationData.contact) return;
+
+    contactSection.innerHTML = `
+        <div class="container">
+            <h2 class="section-title">${navigationData.contact.title}</h2>
+            <p class="section-subtitle">${navigationData.contact.subtitle}</p>
+            
+            <div class="contact-content">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h3>${navigationData.contact.contactInfo.title}</h3>
+                    <div class="contact-details">
+                        ${navigationData.contact.contactInfo.details.map(detail => `
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="${detail.icon}"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>${detail.title}</h4>
+                                    <p>${detail.text}</p>
+                                    <a href="${detail.link}" ${detail.target ? `target="${detail.target}"` : ''}>${detail.linkText}</a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4>${navigationData.contact.socialLinks.title}</h4>
+                        <div class="social-icons">
+                            ${navigationData.contact.socialLinks.links.map(link => `
+                                <a href="${link.href}" class="social-link" target="_blank" title="${link.platform}">
+                                    <i class="${link.icon}"></i>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3>${navigationData.contact.contactForm.title}</h3>
+                    <form id="contactForm">
+                        ${navigationData.contact.contactForm.fields.map(field => `
+                            <div class="form-group">
+                                <label for="${field.id}">${field.label}</label>
+                                ${field.type === 'textarea' ? 
+                                    `<textarea id="${field.id}" name="${field.id}" rows="${field.rows || 5}" ${field.required ? 'required' : ''}></textarea>` :
+                                    `<input type="${field.type}" id="${field.id}" name="${field.id}" ${field.required ? 'required' : ''}>`
+                                }
+                                <span class="error-message"></span>
+                            </div>
+                        `).join('')}
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">${navigationData.contact.contactForm.submitText}</span>
+                            <span class="btn-loading">
+                                <i class="fas fa-spinner fa-spin"></i> ${navigationData.contact.contactForm.loadingText}
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="map-section">
+                <h3>${navigationData.contact.mapSection.title}</h3>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="${navigationData.contact.mapSection.placeholder.icon}"></i>
+                        <p>${navigationData.contact.mapSection.placeholder.text}</p>
+                        <a href="${navigationData.contact.mapSection.placeholder.link}" target="_blank" class="map-link">
+                            ${navigationData.contact.mapSection.placeholder.linkText}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// script.js
+function generateFooterLinks() {
+    const footerLinksContainers = document.querySelectorAll('.footer-links');
+    console.log('Found footer links containers:', footerLinksContainers.length);
+    
+    // Quick Links - pehla footer-links
+    if (footerLinksContainers[0]) {
+        console.log('Setting quick links in container 1');
+        footerLinksContainers[0].innerHTML = `
+            <h3>Quick Links</h3>
+            <ul>
+                ${navigationData.footer.quickLinks.map(link => `
+                    <li><a href="${link.href}">${link.text}</a></li>
+                `).join('')}
+            </ul>
+        `;
+    }
+
+    // Resources - dusra footer-links  
+    if (footerLinksContainers[1]) {
+        console.log('Setting resources in container 2');
+        footerLinksContainers[1].innerHTML = `
+            <h3>Resources</h3>
+            <ul>
+                ${navigationData.footer.resources.map(link => `
+                    <li><a href="${link.href}" target="_blank">${link.text}</a></li>
+                `).join('')}
+            </ul>
+        `;
+    }
+}
+
+function generateFooterContact() {
+    const container = document.querySelector('.footer-contact');
+    if (!container || !navigationData.footer.contactInfo) return;
+
+    container.innerHTML = `
+        <h3>Get In Touch</h3>
+        <div class="contact-info">
+            ${navigationData.footer.contactInfo.map(contact => {
+                if (contact.href) {
+                    return `
+                        <div class="contact-item">
+                            <i class="${contact.icon}"></i>
+                            <a href="${contact.href}">${contact.text}</a>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="contact-item">
+                            <i class="${contact.icon}"></i>
+                            <span>${contact.text}</span>
+                        </div>
+                    `;
+                }
+            }).join('')}
+        </div>
+        
+        <div class="newsletter">
+            <h4>Stay Updated</h4>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    `;
+}
+
+function generateFooterBottom() {
+    const container = document.querySelector('.footer-bottom');
+    if (!container || !navigationData.footer.legalLinks) return;
+
+    container.innerHTML = `
+        <div class="footer-copyright">
+            <p>&copy; 2024 GeeksforGeeks Campus Body, NITRA Technical Campus. All rights reserved.</p>
+        </div>
+        <div class="footer-credits">
+            <p>Made with <i class="fas fa-heart"></i> by GFG NITRA Team</p>
+        </div>
+        <div class="footer-legal">
+            ${navigationData.footer.legalLinks.map(link => `
+                <a href="${link.href}">${link.text}</a>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Setup action buttons
+function setupActionButtons() {
+    // Join Community buttons
+    const joinButtons = document.querySelectorAll('.join-btn, .btn-primary, [data-action="join-community"]');
+    joinButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            window.open(navigationData.actionLinks.joinCommunity, '_blank');
+        });
+    });
+
+    // Contact buttons
+    const contactButtons = document.querySelectorAll('[data-action="contact-email"]');
+    contactButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            window.location.href = navigationData.actionLinks.contactEmail;
+        });
+    });
+}
+
+// ===== NAVBAR FUNCTIONALITY =====
+function initNavbar() {
     const navbar = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-link');
     const mobileMenu = document.querySelector('.mobile-menu');
-    const joinBtn = document.querySelector('.join-btn');
+
+    if (!navbar) return;
 
     // Scroll effect for navbar
     window.addEventListener('scroll', function() {
@@ -17,69 +442,98 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Active link highlighting
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Remove active class from all links
-            navLinks.forEach(l => l.classList.remove('active'));
-            // Add active class to clicked link
-            this.classList.add('active');
-        });
-    });
-
     // Mobile menu functionality
-    mobileMenu.addEventListener('click', function() {
-        alert('Mobile menu will open here!');
-        // Later we'll add proper mobile menu functionality
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.classList.toggle('active');
+                this.classList.toggle('active');
+            }
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        
+        if (navLinks && navLinks.classList.contains('active') && 
+            !e.target.closest('.nav-links') && 
+            !e.target.closest('.mobile-menu')) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn?.classList.remove('active');
+        }
     });
 
-    // Join button functionality
-    joinBtn.addEventListener('click', function() {
-        alert('Redirecting to join community...');
-        // Later add actual redirect link
-    });
-
-    // Smooth scroll (basic implementation)
+    // Active link highlighting and smooth scroll
+    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const href = this.getAttribute('href');
             
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+            // Handle anchor links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            // Close mobile menu after click
+            const navLinksContainer = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.querySelector('.mobile-menu');
+            if (navLinksContainer && navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
+                mobileMenuBtn?.classList.remove('active');
             }
         });
     });
-});
+}
 
-// Hero section animations and functionality
+// ===== HERO SECTION =====
 function initHeroSection() {
-    const joinBtn = document.querySelector('.btn-primary');
-    const eventsBtn = document.querySelector('.btn-secondary');
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection) return;
+
+    const joinBtn = heroSection.querySelector('.btn-primary');
+    const eventsBtn = heroSection.querySelector('.btn-secondary');
     
-    // Join button functionality
-    joinBtn.addEventListener('click', function() {
-        window.open('https://chat.whatsapp.com/your-group-link', '_blank');
-    });
-    
-    // Events button functionality
-    eventsBtn.addEventListener('click', function() {
-        // Smooth scroll to events section
-        document.querySelector('#events').scrollIntoView({
-            behavior: 'smooth'
+    if (joinBtn) {
+        joinBtn.addEventListener('click', function() {
+            window.open(navigationData.actionLinks.joinCommunity, '_blank');
         });
-    });
+    }
     
-    // Stats counter animation
+    if (eventsBtn) {
+        eventsBtn.addEventListener('click', function() {
+            const eventsSection = document.querySelector('#events');
+            if (eventsSection) {
+                eventsSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                window.location.href = 'events.html';
+            }
+        });
+    }
+    
     animateStats();
 }
 
 function animateStats() {
     const stats = document.querySelectorAll('.stat h3');
+    if (stats.length === 0) return;
+
     const values = [500, 25, 15];
     const duration = 2000;
     
@@ -100,14 +554,11 @@ function animateStats() {
     });
 }
 
-// Initialize hero section when DOM loads
-document.addEventListener('DOMContentLoaded', initHeroSection);
-
-// About section animations
+// ===== ABOUT SECTION =====
 function initAboutSection() {
     const features = document.querySelectorAll('.feature');
+    if (features.length === 0) return;
     
-    // Intersection Observer for feature animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -125,17 +576,19 @@ function initAboutSection() {
     });
 }
 
-// Initialize about section
-document.addEventListener('DOMContentLoaded', initAboutSection);
-
-// Team section functionality
+// ===== TEAM SECTION =====
 function initTeamSection() {
+    const teamSection = document.querySelector('#team');
+    if (!teamSection || typeof teamData === 'undefined') return;
+
     displayTeamMembers('all');
     setupTeamFilters();
 }
 
 function displayTeamMembers(teamFilter) {
     const teamGrid = document.querySelector('.team-grid');
+    if (!teamGrid) return;
+
     const filteredMembers = teamFilter === 'all' ? teamData : teamData.filter(member => member.team === teamFilter);
     
     teamGrid.innerHTML = filteredMembers.map(member => `
@@ -165,6 +618,8 @@ function displayTeamMembers(teamFilter) {
     `).join('');
 }
 
+
+
 function createSocialLinks(social) {
     const socialIcons = {
         linkedin: { icon: 'fab fa-linkedin-in', class: 'social-linkedin' },
@@ -192,6 +647,7 @@ function createSocialLinks(social) {
 
 function setupTeamFilters() {
     const filterBtns = document.querySelectorAll('.team-filter-btn');
+    if (filterBtns.length === 0) return;
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -202,16 +658,11 @@ function setupTeamFilters() {
     });
 }
 
-// Initialize team section when DOM loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Other initializations...
-    if (document.querySelector('#team')) {
-        initTeamSection();
-    }
-});
-
-// Gallery functionality
+// ===== GALLERY SECTION =====
 function initGallerySection() {
+    const gallerySection = document.querySelector('#gallery');
+    if (!gallerySection || typeof galleryData === 'undefined') return;
+
     displayGalleryItems('all');
     setupGalleryFilters();
     setupLightbox();
@@ -219,11 +670,25 @@ function initGallerySection() {
 
 function displayGalleryItems(categoryFilter) {
     const galleryGrid = document.querySelector('.gallery-grid');
+    if (!galleryGrid) return;
+
     const filteredItems = categoryFilter === 'all' ? galleryData : galleryData.filter(item => item.category === categoryFilter);
+    
+    if (filteredItems.length === 0) {
+        galleryGrid.innerHTML = `
+            <div class="no-gallery-items">
+                <i class="fas fa-images"></i>
+                <h3>No images found</h3>
+                <p>There are no ${categoryFilter} gallery items at the moment.</p>
+            </div>
+        `;
+        return;
+    }
     
     galleryGrid.innerHTML = filteredItems.map(item => `
         <div class="gallery-item" data-id="${item.id}" data-category="${item.category}">
             <img src="${item.image}" alt="${item.title}" class="gallery-image" 
+                 loading="lazy"
                  onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/64748B/ffffff?text=Image+Not+Found'">
             <div class="gallery-overlay">
                 <div class="gallery-title">${item.title}</div>
@@ -240,6 +705,7 @@ function displayGalleryItems(categoryFilter) {
 
 function setupGalleryFilters() {
     const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    if (filterBtns.length === 0) return;
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -255,16 +721,25 @@ function setupLightbox() {
     const closeBtn = document.querySelector('.lightbox-close');
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
+
+    if (!lightbox) return;
     
     // Close lightbox
-    closeBtn.addEventListener('click', closeLightbox);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+    
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
     
     // Navigation
-    prevBtn.addEventListener('click', showPrevImage);
-    nextBtn.addEventListener('click', showNextImage);
+    if (prevBtn) {
+        prevBtn.addEventListener('click', showPrevImage);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', showNextImage);
+    }
     
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -276,11 +751,13 @@ function setupLightbox() {
     });
 }
 
-let currentImageIndex = 0;
-
 function openLightbox(imageId) {
     const lightbox = document.getElementById('galleryLightbox');
+    if (!lightbox) return;
+
     currentImageIndex = galleryData.findIndex(item => item.id === imageId);
+    if (currentImageIndex === -1) return;
+
     updateLightbox();
     lightbox.style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -288,48 +765,53 @@ function openLightbox(imageId) {
 
 function closeLightbox() {
     const lightbox = document.getElementById('galleryLightbox');
+    if (!lightbox) return;
+
     lightbox.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
 function showPrevImage() {
+    if (galleryData.length === 0) return;
     currentImageIndex = (currentImageIndex - 1 + galleryData.length) % galleryData.length;
     updateLightbox();
 }
 
 function showNextImage() {
+    if (galleryData.length === 0) return;
     currentImageIndex = (currentImageIndex + 1) % galleryData.length;
     updateLightbox();
 }
 
 function updateLightbox() {
     const item = galleryData[currentImageIndex];
+    if (!item) return;
+
     const lightboxImage = document.querySelector('.lightbox-image');
     const lightboxTitle = document.querySelector('.lightbox-title');
     const lightboxDescription = document.querySelector('.lightbox-description');
     const lightboxEvent = document.querySelector('.lightbox-event');
     const lightboxDate = document.querySelector('.lightbox-date');
     
-    // Image error handling for lightbox
-    lightboxImage.onerror = function() {
-        this.src = 'https://via.placeholder.com/800x600/64748B/ffffff?text=Image+Not+Available';
-    };
+    if (lightboxImage) {
+        lightboxImage.onerror = function() {
+            this.src = 'https://via.placeholder.com/800x600/64748B/ffffff?text=Image+Not+Available';
+        };
+        lightboxImage.src = item.image;
+        lightboxImage.alt = item.title;
+    }
     
-    lightboxImage.src = item.image;
-    lightboxImage.alt = item.title;
-    lightboxTitle.textContent = item.title;
-    lightboxDescription.textContent = item.description;
-    lightboxEvent.textContent = item.event;
-    lightboxDate.textContent = item.date;
+    if (lightboxTitle) lightboxTitle.textContent = item.title;
+    if (lightboxDescription) lightboxDescription.textContent = item.description;
+    if (lightboxEvent) lightboxEvent.textContent = item.event;
+    if (lightboxDate) lightboxDate.textContent = item.date;
 }
 
-// Initialize gallery section
-if (document.querySelector('#gallery')) {
-    initGallerySection();
-}
-
-// FAQ functionality
+// ===== FAQ SECTION =====
 function initFAQSection() {
+    const faqSection = document.querySelector('#faq');
+    if (!faqSection || typeof faqData === 'undefined') return;
+
     displayFAQItems('all');
     setupFAQAccordion();
     setupFAQFilter();
@@ -337,12 +819,16 @@ function initFAQSection() {
 
 function displayFAQItems(categoryFilter) {
     const faqContainer = document.querySelector('.faq-container');
+    if (!faqContainer) return;
+
     const filteredFAQs = categoryFilter === 'all' ? faqData : faqData.filter(faq => faq.category === categoryFilter);
     
     if (filteredFAQs.length === 0) {
         faqContainer.innerHTML = `
             <div class="no-faqs">
-                <p>No questions found for this category.</p>
+                <i class="fas fa-question-circle"></i>
+                <h3>No questions found</h3>
+                <p>There are no ${categoryFilter} questions at the moment.</p>
             </div>
         `;
         return;
@@ -361,20 +847,21 @@ function displayFAQItems(categoryFilter) {
         </div>
     `).join('');
     
-    // Re-attach event listeners after rendering
     setupFAQAccordion();
 }
 
 function setupFAQAccordion() {
     const faqItems = document.querySelectorAll('.faq-item');
+    if (faqItems.length === 0) return;
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        
+        if (!question) return;
+
         question.addEventListener('click', () => {
             // Close all other items
             faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
                 }
             });
@@ -386,9 +873,12 @@ function setupFAQAccordion() {
 }
 
 function setupFAQFilter() {
-    // Create unique categories
+    if (!faqData || faqData.length === 0) return;
+
     const categories = ['all', ...new Set(faqData.map(faq => faq.category))];
-    
+    const faqContainer = document.querySelector('.faq-container');
+    if (!faqContainer) return;
+
     const filterContainer = document.createElement('div');
     filterContainer.className = 'faq-filter';
     
@@ -400,11 +890,10 @@ function setupFAQFilter() {
     `).join('');
     
     // Insert filter before FAQ container
-    const faqContainer = document.querySelector('.faq-container');
     faqContainer.parentNode.insertBefore(filterContainer, faqContainer);
     
     // Add event listeners to filter buttons
-    const filterBtns = document.querySelectorAll('.faq-filter-btn');
+    const filterBtns = filterContainer.querySelectorAll('.faq-filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -414,21 +903,20 @@ function setupFAQFilter() {
     });
 }
 
-// Initialize FAQ section
-if (document.querySelector('#faq')) {
-    initFAQSection();
-}
-
-
-// Contact form functionality
+// ===== CONTACT SECTION =====
 function initContactSection() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
     setupContactForm();
 }
 
 function setupContactForm() {
     const contactForm = document.getElementById('contactForm');
-    const submitBtn = contactForm.querySelector('.submit-btn');
+    const submitBtn = contactForm?.querySelector('.submit-btn');
     
+    if (!contactForm || !submitBtn) return;
+
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -447,6 +935,8 @@ function setupContactForm() {
 
 function validateForm() {
     const form = document.getElementById('contactForm');
+    if (!form) return false;
+
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
     
@@ -464,6 +954,8 @@ function validateField(e) {
     const value = field.value.trim();
     const errorElement = field.parentNode.querySelector('.error-message');
     
+    if (!errorElement) return false;
+
     // Clear previous error
     errorElement.textContent = '';
     field.style.borderColor = '#E2E8F0';
@@ -507,13 +999,18 @@ function clearError(e) {
     const field = e.target;
     const errorElement = field.parentNode.querySelector('.error-message');
     
-    errorElement.textContent = '';
-    field.style.borderColor = '#E2E8F0';
+    if (errorElement) {
+        errorElement.textContent = '';
+        field.style.borderColor = '#E2E8F0';
+    }
 }
 
 async function submitForm() {
     const form = document.getElementById('contactForm');
-    const submitBtn = form.querySelector('.submit-btn');
+    const submitBtn = form?.querySelector('.submit-btn');
+    
+    if (!form || !submitBtn) return;
+
     const formData = new FormData(form);
     
     // Show loading state
@@ -521,7 +1018,7 @@ async function submitForm() {
     submitBtn.disabled = true;
     
     try {
-        // Simulate API call (replace with actual form submission)
+        // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 2000));
         
         // Show success message
@@ -539,8 +1036,59 @@ async function submitForm() {
     }
 }
 
+// ===== FOOTER FUNCTIONALITY =====
+function initFooter() {
+    setupScrollToTop();
+    setupNewsletter();
+}
+
+function setupScrollToTop() {
+    const scrollBtn = document.querySelector('.scroll-to-top');
+    if (!scrollBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+function setupNewsletter() {
+    const newsletterForm = document.querySelector('.newsletter-form');
+    
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput?.value;
+            
+            if (email && validateEmail(email)) {
+                // Simulate newsletter subscription
+                this.innerHTML = `
+                    <div class="newsletter-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Thank you for subscribing!</span>
+                    </div>
+                `;
+            }
+        });
+    }
+}
+
+// ===== UTILITY FUNCTIONS =====
 function showNotification(message, type) {
-    // Create notification element
+    // Remove existing notifications
+    document.querySelectorAll('.notification').forEach(notif => notif.remove());
+
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.innerHTML = `
@@ -567,31 +1115,24 @@ function showNotification(message, type) {
         animation: slideIn 0.3s ease;
     `;
     
-    // Close button
     const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.style.cssText = `
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        cursor: pointer;
-        margin-left: auto;
-    `;
+    closeBtn.addEventListener('click', () => notification.remove());
     
-    closeBtn.addEventListener('click', () => {
-        notification.remove();
-    });
-    
-    // Add to page
     document.body.appendChild(notification);
     
     // Auto remove after 5 seconds
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
-        }
-    }, 5000);
+    setTimeout(() => notification.remove(), 5000);
 }
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
 
 // Add notification styles
 const notificationStyles = `
@@ -605,109 +1146,26 @@ const notificationStyles = `
         opacity: 1;
     }
 }
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+}
 `;
-const styleSheet = document.createElement('style');
-styleSheet.textContent = notificationStyles;
-document.head.appendChild(styleSheet);
 
-// Initialize contact section
-if (document.querySelector('#contact')) {
-    initContactSection();
+// Add styles to document
+if (!document.querySelector('#notification-styles')) {
+    const styleSheet = document.createElement('style');
+    styleSheet.id = 'notification-styles';
+    styleSheet.textContent = notificationStyles;
+    document.head.appendChild(styleSheet);
 }
-
-
-// Footer functionality
-function initFooter() {
-    setupScrollToTop();
-    setupNewsletter();
-    setupSmoothScroll();
-}
-
-// Scroll to top functionality
-function setupScrollToTop() {
-    const scrollBtn = document.querySelector('.scroll-to-top');
-    
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            scrollBtn.classList.add('visible');
-        } else {
-            scrollBtn.classList.remove('visible');
-        }
-    });
-    
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-// Newsletter functionality
-function setupNewsletter() {
-    const newsletterForm = document.querySelector('.newsletter-form');
-    
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            
-            if (validateEmail(email)) {
-                // Simulate newsletter subscription
-                this.innerHTML = `
-                    <div class="newsletter-success">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Thank you for subscribing!</span>
-                    </div>
-                `;
-                
-                // Add success styles
-                const successStyle = `
-                    .newsletter-success {
-                        color: #10B981;
-                        display: flex;
-                        align-items: center;
-                        gap: 0.5rem;
-                        font-weight: 600;
-                    }
-                `;
-                const style = document.createElement('style');
-                style.textContent = successStyle;
-                document.head.appendChild(style);
-            }
-        });
-    }
-}
-
-// Smooth scroll for footer links
-function setupSmoothScroll() {
-    const footerLinks = document.querySelectorAll('.footer-links a[href^="#"]');
-    
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Email validation helper
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Initialize footer when DOM loads
-document.addEventListener('DOMContentLoaded', function() {
-    initFooter();
-});

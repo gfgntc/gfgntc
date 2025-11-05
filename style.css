@@ -1273,6 +1273,39 @@ main {
     text-decoration: underline;
 }
 
+/* Contact section social links */
+.contact-info .social-links {
+    margin-top: 2rem;
+}
+
+.contact-info .social-links h4 {
+    margin-bottom: 1rem;
+    color: #1E293B;
+}
+
+.contact-info .social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.contact-info .social-icons .social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2563EB;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-info .social-icons .social-link:hover {
+    background: #1D4ED8;
+    transform: translateY(-2px);
+}
+
 .social-links h4 {
     color: #1E293B;
     margin-bottom: 1rem;
