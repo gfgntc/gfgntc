@@ -160,7 +160,7 @@ main {
     align-items: center;
     text-align: center;
     color: white;
-    padding: 0 2rem;
+    padding: 4.5rem 2rem;
     position: relative;
     overflow: hidden;
 }
@@ -251,6 +251,7 @@ main {
     gap: 4rem;
     margin-top: 4rem;
     position: relative;
+    justify-content: center;
     z-index: 2;
 }
 
@@ -296,7 +297,7 @@ main {
 /* ===== ABOUT SECTION ===== */
 .about {
     padding: 5rem 2rem;
-    background: #F8FAFC;
+    background: #e4e8ec;
 }
 
 .container {
@@ -334,7 +335,6 @@ main {
 .about-description {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: #475569;
     margin-bottom: 3rem;
     text-align: justify;
 }
@@ -755,6 +755,7 @@ main {
     display: flex;
     justify-content: center;
     gap: 0.8rem;
+    margin-top: 1rem;
 }
 
 .social-link {
@@ -1797,7 +1798,7 @@ main {
 
 @media (max-width: 768px) {
     .footer {
-        padding: 3rem 0 0;
+        padding: 3rem 2rem 1rem;
     }
     
     .footer-content {
