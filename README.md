@@ -1,213 +1,115 @@
-# GFG Campus Body Website
-A responsive single-page website for GeeksforGeeks Campus Body at NITRA Technical Campus.
+# 🌐 GFG NITRA - Campus Body Website
 
-# 📁 Project Structure
+A responsive single-page website for the GeeksforGeeks Campus Body at NITRA Technical Campus, built to showcase our community, team, and activities.
 
-gfgntc/
-├── index.html                 # Main homepage
-├── events.html               # Events page
-├── style.css                 # Main stylesheet
-├── script.js                 # Main JavaScript functionality
-├── navigation-data.js        # Navigation, footer, and static content data
-├── team-data.js              # Team members data
-├── gallery-data.js           # Gallery images data  
-├── faq-data.js               # FAQ questions data
-├── events-data.js            # Events data (for events.html)
-├── images/
-│   ├── team/                 # Team member photos
-│   ├── events/               # Event photos
-│   └── gallery/              # Gallery photos
-└── assets/
-    └── logo.png              # Logo and brand assets
-# 🛠️ How to Update Content
-## 1. Update Navigation & Footer
-Edit navigation-data.js:
+## 🚀 Live Demo
+[Add your GitHub Pages link here]
 
-javascript
-const navigationData = {
-    navLinks: [...],           // Update navbar links
-    footer: {
-        brand: {...},          // Update footer brand info
-        quickLinks: [...],     // Update quick links
-        resources: [...],      // Update resource links
-        socialLinks: [...]     // Update social media links
-    },
-    hero: {...},               // Update hero section
-    about: {...},              // Update about section
-    // ... other sections
-};
-## 2. Update Team Members
-Edit team-data.js:
+## 📁 Project Structure
 
-javascript
-const teamData = [
-    {
-        name: "Member Name",
-        role: "Role",
-        team: "core/tech/design",
-        batch: "B.Tech CSE 2024",
-        description: "Member description",
-        social: {
-            linkedin: "url",
-            github: "url",
-            // ... other social links
-        }
-    }
-    // Add/remove team members as needed
-];
-## 3. Update Gallery Images
-Edit gallery-data.js:
 
-javascript
-const galleryData = [
-    {
-        id: 1,
-        image: "images/gallery/filename.jpg",
-        title: "Image Title",
-        category: "coding/workshop/hackathon",
-        event: "Event Name",
-        description: "Image description"
-    }
-    // Add new images or update existing ones
-];
-## 4. Update FAQ Section
-Edit faq-data.js:
 
-javascript
-const faqData = [
-    {
-        id: 1,
-        question: "Your question?",
-        answer: "Your answer...",
-        category: "membership/events"
-    }
-    // Add new FAQs or modify existing ones
-];
-## 5. Update Events
-Edit events-data.js:
+    gfgntc/
+│
+├── index.html # Main HTML file
+├── style.css # Main stylesheet
+├── script.js # JavaScript functionality
+├── events.js # Events page functionality
+├── events-data.js # Events data configuration
+├── /images
+│ ├── team/ # Team member photos
+│ ├── events/ # Event photos
+│ └── gallery/ # Gallery images
+└── /assets
+└── logo.png # Website logo
 
-javascript
-const eventsData = [
-    {
-        id: 1,
-        title: "Event Title",
-        type: "upcoming/past/partner",
-        date: "Date",
-        description: "Event description",
-        registrationLink: "url" // null if registration closed
-    }
-    // Update events list
-];
-## 6. Update Contact Information
-Edit navigation-data.js - contact section:
 
-javascript
-contact: {
-    contactInfo: {
-        details: [
-            {
-                text: "new-email@domain.com",  // Update email
-                link: "mailto:new-email@domain.com"
-            }
-            // Update other contact details
-        ]
-    },
-    socialLinks: {
-        links: [
-            {
-                href: "new-social-link",  // Update social media links
-                // ...
-            }
-        ]
-    }
-}
-# 🎨 Styling Updates
-Modify Colors & Theme
-Edit style.css:
 
-## css
-:root {
-    --primary-blue: #2563EB;    /* Change primary color */
-    --secondary-green: #10B981; /* Change secondary color */
-    --accent-amber: #F59E0B;    /* Change accent color */
-}
-## Add New Sections
-Add HTML structure in index.html
+## 🛠️ Built With
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Icons**: Font Awesome 6
+- **Framework**: Pure CSS (No external frameworks)
+- **Hosting**: GitHub Pages
+- **Features**: Responsive Design, Smooth Scrolling, Modal Gallery
 
-Create corresponding data structure in navigation-data.js
+## 🧩 Website Sections
 
-Add generation function in script.js
+### 1️⃣ Navigation Bar
+- Sticky navigation with smooth scrolling
+- Logo with GFG + Campus Body identity
+- Navigation links: Home, About, Events, Team, Gallery, FAQ, Contact
+- "Join Community" call-to-action button
+- Mobile-responsive hamburger menu
 
-Style in style.css
+### 2️⃣ Hero Section
+- Eye-catching landing section with college background
+- Main heading: "GeeksforGeeks Campus Body - NITRA Technical Campus"
+- Tagline: "Empowering Coders, Building Communities"
+- Primary CTA button linking to community channels
 
-## 📱 Responsive Design
-The website is fully responsive. Test on:
+### 3️⃣ About Section
+- Campus body introduction and mission statement
+- Establishment details and activities overview
+- Key focus areas: coding contests, workshops, hackathons
+- Partnership badges and institutional logos
 
-Desktop (1200px+)
+### 4️⃣ Events Section
+- **Dynamic events display** with filtering (Upcoming, Past, Partner)
+- **Event cards featuring**:
+  - Event title, date, and description
+  - Partner organization information
+  - Registration status and links
+  - Participant count and duration
+- **Enhanced features**:
+  - Multiple registration forms support
+  - Sub-events scheduling system
+  - Interactive filtering system
 
-Tablet (768px - 1199px)
+### 5️⃣ Team Section
+- Team member profiles with photos
+- Role-based organization (Campus President, Organizers, etc.)
+- Social media links (LinkedIn, GitHub, Instagram)
+- Hover effects and professional layout
 
-Mobile (320px - 767px)
+### 6️⃣ Gallery Section
+- Responsive image grid layout
+- Lightbox modal for full-size image viewing
+- Event categories: Workshops, Competitions, Meetups
+- Optimized image loading and smooth transitions
 
-🚀 Deployment
-GitHub Pages
-Push code to GitHub repository
+### 7️⃣ FAQ Section
+- Accordion-style collapsible questions
+- Common queries about membership and events
+- Mobile-friendly expandable content
+- 6+ pre-loaded questions with detailed answers
 
-Go to Repository Settings → Pages
+### 8️⃣ Contact Section
+- Contact form with validation
+- Social media links and contact information
+- College location map integration
+- Form submission handling
 
-Select source branch (usually main or gh-pages)
+### 9️⃣ Footer
+- Copyright information and credits
+- Quick navigation links
+- Social media icons
+- Team acknowledgment
 
-Your site will be live at https://username.github.io/repository-name
+## 🎯 Key Features
 
-Custom Domain
-Add CNAME file with your domain name
+### ✨ Interactive Elements
+- **Smooth scrolling** navigation
+- **Mobile-responsive** design
+- **Event filtering system** (All/Upcoming/Past/Partner)
+- **Image lightbox gallery**
+- **FAQ accordion** functionality
+- **Form validation** and submission
 
-Update DNS settings
-
-Configure in GitHub Pages settings
-
-# 🔧 Maintenance Tips
-Regular Updates
-Update team members each semester
-
-Add new events regularly
-
-Refresh gallery after each event
-
-Keep FAQ section updated with common queries
-
-Performance
-Optimize images before uploading
-
-Compress large files
-
-Use lazy loading for images
-
-Minimize CSS and JavaScript
-
-SEO
-Update meta tags in index.html
-
-Add alt text to images
-
-Use descriptive page titles
-
-Include relevant keywords in content
-
-## 📞 Support
-For technical issues or updates:
-
-Check this README first
-
-Review the data file structures
-
-Test changes locally before deploying
-
-Contact the development team if needed
-
-## 📄 License
-This project is for GeeksforGeeks Campus Body, NITRA Technical Campus internal use.
-
-Last Updated: ${new Date().toLocaleDateString()}
-
-Happy Coding! 🚀
+### 🎪 Events Management
+```javascript
+// Advanced events data structure supports:
+- Multiple registration forms per event
+- Detailed sub-events scheduling
+- Partner collaborations tracking
+- Registration status management
+- Participant statistics display
