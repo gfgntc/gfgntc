@@ -2,7 +2,7 @@
 const galleryData = [
     {
         id: 1,
-        image: "/images/gallery/hacktoberfest-banner.jpg",
+        image: "images/gallery/hacktoberfest-banner.jpg",
         title: "Hacktoberfest Session",
         category: "workshop",
         event: "Hacktoberfest 2025",
@@ -11,7 +11,7 @@ const galleryData = [
     },
     {
         id: 2,
-        image: "/images/gallery/hactoberfest-meet.png",
+        image: "images/gallery/hactoberfest-meet.png",
         title: "Hacktoberfest Participants",
         category: "workshop", 
         event: "Hacktoberfest 2025",
@@ -20,7 +20,7 @@ const galleryData = [
     },
     {
         id: 3,
-        image: "/images/gallery/hactoberfest-points.png",
+        image: "images/gallery/hactoberfest-points.png",
         title: "Hacktoberfest Participants",
         category: "workshop", 
         event: "Hacktoberfest 2025",
@@ -29,7 +29,7 @@ const galleryData = [
     },
     {
         id: 3,
-        image: "/images/gallery/codeutsav-community.png",
+        image: "images/gallery/codeutsav-community.png",
         title: "Code Utsav Announcement",
         category: "coding",
         event: "Code Utsav 2025",
@@ -38,7 +38,7 @@ const galleryData = [
     },
     {
         id: 4,
-        image: "/images/gallery/codeutsav-reg.png",
+        image: "images/gallery/codeutsav-reg.png",
         title: "Code Utsav Registration",
         category: "coding",
         event: "Code Utsav 2025",
@@ -47,7 +47,7 @@ const galleryData = [
     },
     {
         id: 5,
-        image: "/images/gallery/codeslayer-partner.png",
+        image: "images/gallery/codeslayer-partner.png",
         title: "Codeslayer Hackathon",
         category: "hackathon",
         event: "Codeslayer Hackathon",
@@ -57,7 +57,7 @@ const galleryData = [
     
     {
         id: 6,
-        image: "/images/gallery/elite-partner.png",
+        image: "images/gallery/elite-partner.png",
         title: "Elite Quiz 3",
         category: "coding",
         event: "Elite Quiz 3",
@@ -67,7 +67,7 @@ const galleryData = [
     
     {
         id: 7,
-        image: "/images/gallery/swoc-partner.png",
+        image: "images/gallery/swoc-partner.png",
         title: "Social Winter of Code",
         category: "hackathon",
         event: "SWOC Season 6",
