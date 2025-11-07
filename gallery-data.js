@@ -11,7 +11,7 @@ const galleryData = [
     },
     {
         id: 2,
-        image: "images/gallery/hactoberfest-meet.png",
+        image: "images/gallery/hactoberfest-meet.PNG",
         title: "Hacktoberfest Participants",
         category: "workshop", 
         event: "Hacktoberfest 2025",
@@ -47,7 +47,7 @@ const galleryData = [
     },
     {
         id: 5,
-        image: "images/gallery/codeslayer-partner.png",
+        image: "images/gallery/codeslayer-partner.PNG",
         title: "Codeslayer Hackathon",
         category: "hackathon",
         event: "Codeslayer Hackathon",
@@ -57,7 +57,7 @@ const galleryData = [
     
     {
         id: 6,
-        image: "images/gallery/elite-partner.png",
+        image: "images/gallery/elite-partner.PNG",
         title: "Elite Quiz 3",
         category: "coding",
         event: "Elite Quiz 3",
@@ -67,7 +67,7 @@ const galleryData = [
     
     {
         id: 7,
-        image: "images/gallery/swoc-partner.png",
+        image: "images/gallery/swoc-partner.PNG",
         title: "Social Winter of Code",
         category: "hackathon",
         event: "SWOC Season 6",
