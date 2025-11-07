@@ -1,13 +1,10 @@
-// events.js - Events page functionality
-
-// Initialize events page
+// events.js - Complete Updated Code
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if events data is available
     if (typeof eventsData !== 'undefined') {
         displayEvents('all');
         setupFilters();
     } else {
-        console.error('Events data not found. Make sure events-data.js is loaded.');
+        console.error('Events data not found.');
         showErrorMessage();
     }
 });
@@ -34,28 +31,69 @@ function displayEvents(filter) {
     }
     
     container.innerHTML = filteredEvents.map(event => `
-        <div class="event-card" data-type="${event.type}">
-            <div class="event-header">
-                <span class="event-type type-${event.type}">${event.type.toUpperCase()}</span>
-                <h3 class="event-title">${event.title}</h3>
-                <div class="event-date">${event.date}</div>
-            </div>
-            <div class="event-body">
-                <p class="event-description">${event.description}</p>
-                <div class="event-partner">
-                    <i class="fas fa-handshake"></i>
-                    Partner: ${event.partner}
+            
+            <div class="event-content">
+                <div class="event-header">
+                    <span class="event-type type-${event.type}">${event.type.toUpperCase()}</span>
+                    <h3 class="event-title">${event.title}</h3>
+                    <div class="event-date">${event.date}</div>
                 </div>
-            </div>
-            <div class="event-footer">
-                <button class="register-btn ${!event.registrationLink ? 'disabled' : ''}" 
-                        ${!event.registrationLink ? 'disabled' : ''}
-                        onclick="${event.registrationLink ? `window.open('${event.registrationLink}', '_blank')` : 'return false'}">
-                    ${event.registrationLink ? 'Register Now' : 'Registration Closed'}
-                </button>
-                <div class="event-stats">
-                    <span><i class="fas fa-users"></i> ${event.participants}</span>
-                    <span><i class="fas fa-clock"></i> ${event.duration}</span>
+                
+                <div class="event-body">
+                    <p class="event-description">${event.description}</p>
+                    <div class="event-partner">
+                        <i class="fas fa-handshake"></i>
+                        Partner: ${event.partner}
+                    </div>
+                    
+                    ${event.youtubeLink || (event.resourceLinks && event.resourceLinks.length > 0) ? `
+                        <div class="event-resources">
+                            <h4 class="resources-title">
+                                <i class="fas fa-link"></i>
+                                Event Resources
+                            </h4>
+                            <div class="resources-links">
+                                ${event.youtubeLink ? `
+                                    <a href="${event.youtubeLink}" target="_blank" class="resource-link youtube-link">
+                                        <i class="fab fa-youtube"></i>
+                                        Watch Recording
+                                    </a>
+                                ` : ''}
+                                
+                                ${event.resourceLinks ? event.resourceLinks.map(link => `
+                                    <a href="${link.url}" target="_blank" class="resource-link">
+                                        <i class="fas fa-download"></i>
+                                        ${link.title}
+                                    </a>
+                                `).join('') : ''}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="event-footer">
+                    ${event.registrationLink ? `
+                        <button class="register-btn" onclick="window.open('${event.registrationLink}', '_blank')">
+                            <i class="fas fa-user-plus"></i>
+                            Register Now
+                        </button>
+                    ` : `
+                        <button class="register-btn disabled" disabled>
+                            <i class="fas fa-calendar-check"></i>
+                            Registration Closed
+                        </button>
+                    `}
+                    
+                    <div class="event-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-users"></i>
+                            ${event.participants}
+                        </span>
+                        <span class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            ${event.duration}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,11 +105,8 @@ function setupFilters() {
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             this.classList.add('active');
-            // Filter events
             displayEvents(this.dataset.filter);
         });
     });
@@ -91,10 +126,8 @@ function showErrorMessage() {
     }
 }
 
-// Add error handling for registration buttons
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('register-btn') && !e.target.classList.contains('disabled')) {
-        // You can add analytics or tracking here
         console.log('Registration button clicked');
     }
 });

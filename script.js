@@ -393,7 +393,7 @@ function generateFooterBottom() {
 
     container.innerHTML = `
         <div class="footer-copyright">
-            <p>&copy; 2024 GeeksforGeeks Campus Body, NITRA Technical Campus. All rights reserved.</p>
+            <p>&copy; 2025 GeeksforGeeks Campus Body, NITRA Technical Campus. All rights reserved.</p>
         </div>
         <div class="footer-credits">
             <p>Made with <i class="fas fa-heart"></i> by GFG NITRA Team</p>
