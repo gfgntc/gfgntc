@@ -1,0 +1,93 @@
+# Robots.txt for GFG NTC - GeeksforGeeks Campus Chapter at NITRA Technical Campus
+# This file tells search engine crawlers which pages they can and cannot crawl
+
+User-agent: *
+Allow: /
+
+# Allow all major search engines to crawl the site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Disallow crawling of backend files and sensitive directories
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /api/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /vendor/
+Disallow: /tmp/
+Disallow: /logs/
+
+# Allow crawling of important assets for better rendering
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Disallow specific files that shouldn't be indexed
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /composer.json
+Disallow: /*.md$
+Disallow: /README
+Disallow: /LICENSE
+Disallow: /config.php
+Disallow: /.env
+Disallow: /database/
+
+# Allow crawling of important pages and resources
+Allow: /events/
+Allow: /team/
+Allow: /gallery/
+Allow: /about/
+Allow: /contact/
+
+# Disallow query parameters that might create duplicate content
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?page=
+Disallow: /*?search=
+
+# Allow crawling of important images for events and team
+Allow: /images/events/
+Allow: /images/team/
+Allow: /images/gallery/
+
+# Sitemap location
+Sitemap: https://gfgntc.github.io/gfgntc/sitemap.xml
+
+# Crawl-delay to prevent server overload
+Crawl-delay: 1
+
+# Host directive for canonical URL
+Host: https://gfgntc.github.io/gfgntc
+
+# Additional directives for better crawling
+# Googlebot specific directives
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/
+Disallow: /images/private/
+
+# AdsBot directives
+User-agent: AdsBot-Google
+Allow: /
+
+# Mediapartners directives
+User-agent: Mediapartners-Google
+Allow: /
